@@ -1,0 +1,8 @@
+D:\Others\ReadExcelFileApp\ReadExcelFileApp\bin\x86\Debug\ReadExcelFileApp.exe.config
+D:\Others\ReadExcelFileApp\ReadExcelFileApp\bin\x86\Debug\ReadExcelFileApp.exe
+D:\Others\ReadExcelFileApp\ReadExcelFileApp\bin\x86\Debug\ReadExcelFileApp.pdb
+D:\Others\ReadExcelFileApp\ReadExcelFileApp\obj\x86\Debug\ReadExcelFileApp.Form1.resources
+D:\Others\ReadExcelFileApp\ReadExcelFileApp\obj\x86\Debug\ReadExcelFileApp.Properties.Resources.resources
+D:\Others\ReadExcelFileApp\ReadExcelFileApp\obj\x86\Debug\ReadExcelFileApp.csproj.GenerateResource.Cache
+D:\Others\ReadExcelFileApp\ReadExcelFileApp\obj\x86\Debug\ReadExcelFileApp.exe
+D:\Others\ReadExcelFileApp\ReadExcelFileApp\obj\x86\Debug\ReadExcelFileApp.pdb
