@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -89,6 +89,7 @@ namespace ReadExcelFileApp
 
                     if (proceed)
                     {
+
                         //SELECT `PRIMARY_KEY`, rand() FROM table ORDER BY rand() LIMIT 5000;
                         DataTable filter = new DataTable();
                         // Read the filter table and making the condition
@@ -108,30 +109,16 @@ namespace ReadExcelFileApp
                                 }
                             }
                         }
-                        //con.BeginTransaction();
-                        //OleDbCommand cmd = new OleDbCommand(SqlQuery + condition, con);
-                        //using (OleDbCommand cmd = new OleDbCommand(SqlQuery + condition, con))
-                        //{
-                        //    //cmd.CommandTimeout = 3600;
-                        //    OleDbDataReader rdr = cmd.ExecuteReader();
-                        //    dtexcel.Load(rdr);
-                        //}
-                        //con.Dispose(); - SqlQuery + " WHERE "+condition
+                        oleAdpt = null;
+                        filter = null;
+                        dt = null;
 
-                        //var selectStatement = string.Format(SqlQuery + condition);
-                        //using (OleDbDataAdapter cmd = new OleDbDataAdapter(SqlQuery + " WHERE "+condition, con))
-                        //{
-                        //    cmd.Fill(dtexcel);
-                        //}
-
-
-                        System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(SqlQuery + " WHERE " + condition, con);
-                        cmd.CommandType = CommandType.Text;
-                        new System.Data.OleDb.OleDbDataAdapter(cmd).Fill(dtexcel);
-
-                        //OleDbDataAdapter oleAdptx = new OleDbDataAdapter("select * from (" + SqlQuery + ") x " + condition, con);//here we read data from sheet1
-                        //OleDbDataAdapter oleAdptx = new OleDbDataAdapter(SqlQuery + condition, con);//here we read data from sheet1
-                        //oleAdptx.Fill(dtexcel);//fill excel data into dataTable
+                        if (con.State == ConnectionState.Closed) con.Open();
+                        OleDbCommand cmd1 = con.CreateCommand();
+                        cmd1.CommandText = "SELECT * FROM ( "+SqlQuery + " ) x WHERE " + condition;
+                        OleDbDataReader reader = cmd1.ExecuteReader();
+                        dtexcel.Load(reader);
+                        if (con.State == ConnectionState.Open) con.Close();
                     }
                     else {
                         throw new Exception("Filter Sheet is missing");
@@ -139,11 +126,11 @@ namespace ReadExcelFileApp
                 }
                 catch (Exception ex)
                 {
-                    if(con.State == ConnectionState.Open) con.Close();
                     MessageBox.Show(ex.Message.ToString());
                 }
-                finally {
-                    
+                finally
+                {
+                    if (con.State == ConnectionState.Open) con.Close();
                 }
             }
             return dtexcel;
